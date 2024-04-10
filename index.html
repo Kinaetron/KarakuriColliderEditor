@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Karakuri Hitbox Editor</title>
+  </head>
+  <body>
+    <div id="top">
+      <label for="boxMode">Box Mode:</label>
+      <select id="boxMode" onchange="boxModeSelection()">
+        <option value="drawingMode" selected>Draw Box</option>
+        <option value="selectMode">Select Box</option>
+      </select>
+
+      <label for="boxType">Box Type:</label>
+      <select id="boxType" onchange="boxTypeSelection()">
+        <option value="hitbox" selected>Hitbox</option>
+        <option value="hurtbox">Hurtbox</option>
+        <option value="colliderbox">Colliderbox</option>
+      </select>
+
+      <button onclick="Delete()">Delete Box</button>
+
+      <label for="x">X:</label>
+      <input type="text" id="x" name="x" pattern="[0-9]{3}" maxlength="3">
+      <label for="y">Y:</label>
+      <input type="text" id="y" name="y" pattern="[0-9]{3}" maxlength="3">
+
+      <label for="width">Width:</label>
+      <input type="text" id="width" name="width" pattern="[0-9]{3}" maxlength="3">
+      <label for="height">Height:</label>
+      <input type="text" id="height" name="height" pattern="[0-9]{3}" maxlength="3">
+    </div>
+    <div id="middle">
+      <canvas id="frameImage" width=800 height=700>Frame Image</canvas>
+      <canvas id="overlay" width=800 height=700></canvas>
+      <canvas id="canvas" width=800 height=700></canvas>
+    </div>
+    <div id="button">
+      <button id="decrement-btn">Left</button>
+      <button id="increment-btn">Right</button>
+      <button onclick="ZoomIn()">Zoom In</button>
+      <button onclick="ZoomOut()">Zoom Out</button>
+      <button onclick="DefaultSize()">Default Size</button>
+    </div>
+  </body>
+  <script src="./zoom.js"></script>
+  <script src="./hitbox.js"></script>
+  <script src="./renderer.js"></script>
+</html>

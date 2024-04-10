@@ -1,0 +1,16 @@
+{
+  "name": "karakuricollidereditor",
+  "version": "1.0.0",
+  "description": "2D Collider Editor",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Kinaetron",
+  "license": "MIT",
+  "dependencies": {
+    "ase-parser": "^0.0.18",
+    "electron": "^29.2.0",
+    "sharp": "^0.33.3"
+  }
+}
