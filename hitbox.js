@@ -110,7 +110,7 @@ function handleMouseUp(e) {
                 Math.round(prevWidth / currentZoom),
                 Math.round(prevHeight / currentZoom),
                 currentType));
-
+                
         ctxo.strokeRect(prevStartX, prevStartY, prevWidth, prevHeight);
     }
     else if(isSelecting) {
@@ -239,16 +239,19 @@ function boxTypeSelection() {
 
     if(selectedValue === "hitbox") {
         currentType = hitboxType;
+        currentColour = hitboxColour;
         ctx.strokeStyle = hitboxColour;
         ctxo.strokeStyle = hitboxColour;
     }
     else if (selectedValue === "hurtbox") {
         currentType = hurtboxType;
+        currentColour = hurtboxColour;
         ctx.strokeStyle = hurtboxColour;
         ctxo.strokeStyle = hurtboxColour;
     }
     else if (selectedValue === "colliderbox") {
         currentType = colliderType;
+        currentColour = colliderboxColour;
         ctx.strokeStyle = colliderboxColour;
         ctxo.strokeStyle = colliderboxColour;
     }
