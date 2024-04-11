@@ -40,12 +40,12 @@ function Zoom()
     xPositionImage = (frameCanvas.width / 2) - (width * currentZoom / 2);
     yPositionImage = (frameCanvas.height / 2) - (height * currentZoom / 2);
 
-    const img = new Image();
-    img.src = sourceImage;
-
     frameContext.imageSmoothingEnabled = false;
 
     frameContext.clearRect(0, 0, frameCanvas.width, frameCanvas.height);
+
+    const img = new Image();
+    img.src = sourceImage;
 
     const x = (frameCanvas.width - width * currentZoom) / 2;
     const y = (frameCanvas.height - height * currentZoom) / 2;
