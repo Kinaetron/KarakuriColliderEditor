@@ -44,7 +44,7 @@ window.karakuriAPI.onUpdateFrame((value) =>
 
     Zoom();
     resetSelected();
-    reDrawBoxes();
+    reDrawBoxes(false);
 });
 
 window.karakuriAPI.onOpenBoxes((value) => {
@@ -52,7 +52,7 @@ window.karakuriAPI.onOpenBoxes((value) => {
 
     if(value.boxes) {
         frameBoxes = value.boxes;
-        reDrawBoxes();
+        reDrawBoxes(false);
     }
     else {
         for (let i = 0; i < frameCount; i++) {

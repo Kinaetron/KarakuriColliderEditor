@@ -80,7 +80,7 @@ let prevHeight = 0;
 let selectedBoxIndex = -1;
 
 function resizeRectangles() {
-    reDrawBoxes();
+    reDrawBoxes(false);
     reDrawSelectedBox();
 }
 
@@ -110,7 +110,7 @@ function handleMouseUp(e) {
                 Math.round(prevWidth / currentZoom),
                 Math.round(prevHeight / currentZoom),
                 currentType));
-                
+
         ctxo.strokeRect(prevStartX, prevStartY, prevWidth, prevHeight);
     }
     else if(isSelecting) {
@@ -221,7 +221,7 @@ function boxModeSelection() {
     
         selectedRectangleIndex = - 1;
     
-        reDrawBoxes();
+        reDrawBoxes(true);
     
         xTextBox.value = "";
         yTextBox.value = "";
@@ -259,12 +259,11 @@ function boxTypeSelection() {
 }
 
 function Delete() {
-    if (isSelecting) 
-    {
+    if (isSelecting) {
         frameBoxes[frameIndex].splice(selectedBoxIndex, 1);
         selectedBoxIndex = - 1;
 
-        reDrawBoxes();
+        reDrawBoxes(true);
 
         xTextBox.value = "";
         yTextBox.value = "";
@@ -299,28 +298,28 @@ window.addEventListener("resize", function () {
 xTextBox.addEventListener("input", function() {
     frameBoxes[frameIndex][selectedBoxIndex].x = Math.round((xTextBox.value - xPositionImage) / currentZoom);
 
-    reDrawBoxes();
+    reDrawBoxes(false);
     reDrawSelectedBox();
 });
 
 yTextBox.addEventListener("input", function() {
     frameBoxes[frameIndex][selectedBoxIndex].y = Math.round((yTextBox.value - yPositionImage) / currentZoom);
 
-    reDrawBoxes();
+    reDrawBoxes(false);
     reDrawSelectedBox();
 });
 
 widthTextBox.addEventListener("input", function() {
     frameBoxes[frameIndex][selectedBoxIndex].width = Math.round(widthTextBox.value / currentZoom);
 
-    reDrawBoxes();
+    reDrawBoxes(false);
     reDrawSelectedBox();
 });
 
 heightTextBox.addEventListener("input", function() {
     frameBoxes[frameIndex][selectedBoxIndex].height = Math.round(heightTextBox.value / currentZoom);
 
-    reDrawBoxes();
+    reDrawBoxes(false);
     reDrawSelectedBox();
 });
 
@@ -328,12 +327,13 @@ function resetSelected() {
     selectedBoxIndex = -1;
 }
 
-function reDrawBoxes() {
+function reDrawBoxes(drawSelectedBox) {
     ctx.clearRect(0, 0, overlay.width, overlay.height);
     ctxo.clearRect(0, 0, overlay.width, overlay.height);
 
     for(var i = 0; i < frameBoxes[frameIndex].length; i++) {
-        if(selectedBoxIndex == i){
+
+        if(drawSelectedBox == false && selectedBoxIndex == i) {
             continue;
         }
 
