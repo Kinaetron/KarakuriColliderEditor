@@ -80,8 +80,14 @@ let prevHeight = 0;
 let selectedBoxIndex = -1;
 
 function resizeRectangles() {
-    reDrawBoxes(false);
-    reDrawSelectedBox();
+
+    if(isDrawing) {
+        reDrawBoxes(true);
+    }
+    else if(isSelecting) {
+        reDrawBoxes(false);
+        reDrawSelectedBox();
+    }
 }
 
 function handleMouseDown(e) {
