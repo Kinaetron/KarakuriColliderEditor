@@ -10,21 +10,18 @@ var yTextBox = document.getElementById("y");
 var widthTextBox = document.getElementById("width");
 var heightTextBox = document.getElementById("height");
 
-ctx.lineWidth = 2;
-ctxo.lineWidth = 2;
-
 const hitboxType = "hitbox";
 const hurtboxType = "hurtbox";
 const colliderType = "colliderbox";
 
-const hitboxColour = "blue";
-const hurtboxColour = "red";
-const colliderboxColour  = "green";
-const selectedboxColour = "yellow";
+const hitboxColour = "rgb(0 0 255 / 30%)";
+const hurtboxColour = "rgb(255 0 0 / 30%)";
+const colliderboxColour  = "rgb(0 255 0 / 30%)";
+const selectedboxColour = "rgb(255 255 0 / 30%)";
 
 // style the context
-ctx.strokeStyle = hitboxColour;
-ctxo.strokeStyle = hitboxColour;
+ctx.fillStyle = hitboxColour;
+ctxo.fillStyle = hitboxColour;
 
 let currentType = hitboxType;
 let currentColour = hitboxColour;
@@ -117,7 +114,7 @@ function handleMouseUp(e) {
                 Math.round(prevHeight / currentZoom),
                 currentType));
 
-        ctxo.strokeRect(prevStartX, prevStartY, prevWidth, prevHeight);
+        ctxo.fillRect(prevStartX, prevStartY, prevWidth, prevHeight);
     }
     else if(isSelecting) {
         if(!frameBoxes) {
@@ -140,26 +137,26 @@ function handleMouseUp(e) {
                         continue;
                     }
 
-                    currentColour = ctxo.strokeStyle;
+                    currentColour = ctxo.fillStyle;
                     const boxType = frameBoxes[frameIndex][j].boxType;
 
                     if(boxType === hitboxType) {
-                        ctxo.strokeStyle = hitboxColour;
+                        ctxo.fillStyle = hitboxColour;
                     }
                     else if(boxType === hurtboxType) {
-                        ctxo.strokeStyle = hurtboxColour;
+                        ctxo.fillStyle = hurtboxColour;
                     }
                     else if(boxType === colliderType) {
-                        ctxo.strokeStyle = colliderboxColour;
+                        ctxo.fillStyle = colliderboxColour;
                     }
 
-                    ctxo.strokeRect(
+                    ctxo.fillRect(
                         frameBoxes[frameIndex][j].x * currentZoom + xPositionImage, 
                         frameBoxes[frameIndex][j].y * currentZoom + yPositionImage, 
                         frameBoxes[frameIndex][j].width * currentZoom, 
                         frameBoxes[frameIndex][j].height * currentZoom);
 
-                    ctxo.strokeStyle = currentColour;
+                    ctxo.fillStyle = currentColour;
                 }
                 
                 reDrawSelectedBox();
@@ -208,7 +205,7 @@ function handleMouseMove(e) {
     
         // draw a new rect from the start position 
         // to the current mouse position
-        ctx.strokeRect(startX, startY, width, height);
+        ctx.fillRect(startX, startY, width, height);
     
         prevStartX = startX;
         prevStartY = startY;
@@ -246,22 +243,21 @@ function boxTypeSelection() {
     if(selectedValue === "hitbox") {
         currentType = hitboxType;
         currentColour = hitboxColour;
-        ctx.strokeStyle = hitboxColour;
-        ctxo.strokeStyle = hitboxColour;
+        ctx.fillStyle = hitboxColour;
+        ctxo.fillStyle = hitboxColour;
     }
     else if (selectedValue === "hurtbox") {
         currentType = hurtboxType;
         currentColour = hurtboxColour;
-        ctx.strokeStyle = hurtboxColour;
-        ctxo.strokeStyle = hurtboxColour;
+        ctx.fillStyle = hurtboxColour;
+        ctxo.fillStyle = hurtboxColour;
     }
     else if (selectedValue === "colliderbox") {
         currentType = colliderType;
         currentColour = colliderboxColour;
-        ctx.strokeStyle = colliderboxColour;
-        ctxo.strokeStyle = colliderboxColour;
+        ctx.fillStyle = colliderboxColour;
+        ctxo.fillStyle = colliderboxColour;
     }
-
 }
 
 function Delete() {
@@ -344,27 +340,27 @@ function reDrawBoxes(drawSelectedBox) {
         }
 
         if(frameBoxes[frameIndex][i].boxType === hitboxType) {
-            ctx.strokeStyle  = hitboxColour;
-            ctxo.strokeStyle = hitboxColour;
+            ctx.fillStyle  = hitboxColour;
+            ctxo.fillStyle = hitboxColour;
         }
         else if(frameBoxes[frameIndex][i].boxType === hurtboxType) {
-            ctx.strokeStyle  = hurtboxColour;
-            ctxo.strokeStyle = hurtboxColour;
+            ctx.fillStyle  = hurtboxColour;
+            ctxo.fillStyle = hurtboxColour;
         }
         else if(frameBoxes[frameIndex][i].boxType === colliderType) {
-            ctx.strokeStyle  = colliderboxColour;
-            ctxo.strokeStyle = colliderboxColour;
+            ctx.fillStyle  = colliderboxColour;
+            ctxo.fillStyle = colliderboxColour;
         }
         
-        ctxo.strokeRect(
+        ctxo.fillRect(
             frameBoxes[frameIndex][i].x * currentZoom + xPositionImage, 
             frameBoxes[frameIndex][i].y * currentZoom + yPositionImage, 
             frameBoxes[frameIndex][i].width * currentZoom, 
             frameBoxes[frameIndex][i].height * currentZoom);
     }
 
-    ctx.strokeStyle  = currentColour;
-    ctxo.strokeStyle = currentColour;
+    ctx.fillStyle  = currentColour;
+    ctxo.fillStyle = currentColour;
 
 }
 
@@ -373,14 +369,14 @@ function reDrawSelectedBox() {
         return;
     }
 
-    currentColour = ctxo.strokeStyle;
-    ctxo.strokeStyle = selectedboxColour;
+    currentColour = ctxo.fillStyle;
+    ctxo.fillStyle = selectedboxColour;
 
-    ctxo.strokeRect(
+    ctxo.fillRect(
         frameBoxes[frameIndex][selectedBoxIndex].x * currentZoom + xPositionImage, 
         frameBoxes[frameIndex][selectedBoxIndex].y * currentZoom + yPositionImage, 
         frameBoxes[frameIndex][selectedBoxIndex].width * currentZoom, 
         frameBoxes[frameIndex][selectedBoxIndex].height * currentZoom);
     
-    ctxo.strokeStyle = currentColour;
+    ctxo.fillStyle = currentColour;
 }
