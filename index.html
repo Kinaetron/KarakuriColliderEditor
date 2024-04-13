@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Karakuri Hitbox Editor</title>
+    <title>Karakuri Collider Editor</title>
   </head>
   <body>
     <div id="top">
@@ -33,9 +33,11 @@
       <input type="text" id="height" name="height" pattern="[0-9]{3}" maxlength="3">
     </div>
     <div id="middle">
-      <canvas id="frameImage" width=800 height=700>Frame Image</canvas>
-      <canvas id="overlay" width=800 height=700></canvas>
-      <canvas id="canvas" width=800 height=700></canvas>
+      <div id="canvas-container">
+        <canvas id="frameImage" width=800 height=700>Frame Image</canvas>
+        <canvas id="overlay" width=800 height=700></canvas>
+        <canvas id="canvas" width=800 height=700></canvas>
+      </div>
     </div>
     <div id="button">
       <button id="decrement-btn">Left</button>
