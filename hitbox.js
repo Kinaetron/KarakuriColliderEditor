@@ -117,6 +117,7 @@ function handleMouseUp(e) {
         ctxo.fillRect(prevStartX, prevStartY, prevWidth, prevHeight);
     }
     else if(isSelecting) {
+
         if(!frameBoxes) {
             return;
         }
@@ -130,6 +131,7 @@ function handleMouseUp(e) {
 
                 selectedBoxIndex = i;
                 ctx.clearRect(0, 0, overlay.width, overlay.height);
+                ctxo.clearRect(0, 0, overlay.width, overlay.height);
 
                 for(var j = 0; j < frameBoxes[frameIndex].length; j++) {
 
