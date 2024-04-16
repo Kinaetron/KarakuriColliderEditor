@@ -14,10 +14,10 @@ const hitboxType = "hitbox";
 const hurtboxType = "hurtbox";
 const colliderType = "colliderbox";
 
-const hitboxColour = "rgb(0 0 255 / 30%)";
-const hurtboxColour = "rgb(255 0 0 / 30%)";
-const colliderboxColour  = "rgb(0 255 0 / 30%)";
-const selectedboxColour = "rgb(255 255 0 / 30%)";
+const hitboxColour = "rgb(0 0 255 / 40%)";
+const hurtboxColour = "rgb(255 0 0 / 40%)";
+const colliderboxColour  = "rgb(0 255 0 / 40%)";
+const selectedboxColour = "rgb(255 255 0 / 40%)";
 
 // style the context
 ctx.fillStyle = hitboxColour;
