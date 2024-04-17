@@ -34,7 +34,6 @@ function handleKeyPress(event) {
 function handleMouseWheel(event) {
 
     event.preventDefault();
-
     const direction = event.deltaY > 0 ? 'Down' : 'Up';
 
     switch(direction) {

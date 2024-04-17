@@ -184,37 +184,60 @@ function handleMouseOut(e) {
 }
 
 function handleMouseMove(e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    // get the current mouse position
+    mouseX = parseInt(e.clientX - offsetX);
+    mouseY = parseInt(e.clientY - offsetY);
+
+    // clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     if(isDrawing) {
-        e.preventDefault();
-        e.stopPropagation();
-    
         // if we're not dragging, just return
         if (!isDown) {
             return;
         }
     
-        // get the current mouse position
-        mouseX = parseInt(e.clientX - offsetX);
-        mouseY = parseInt(e.clientY - offsetY);
-    
         // calculate the rectangle width/height based
         // on starting vs current mouse position
         var width = mouseX - startX;
         var height = mouseY - startY;
-    
-        // clear the canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
         // draw a new rect from the start position 
         // to the current mouse position
         ctx.fillRect(startX, startY, width, height);
     
-        prevStartX = startX;
-        prevStartY = startY;
-    
         prevWidth = width;
         prevHeight = height;
     }
+    else if(isSelecting) {
+
+        if(selectedBoxIndex == -1 || !isDown) {
+            return;
+        }
+
+        if(pointBoxCollide(
+            startX, 
+            startY, 
+            frameBoxes[frameIndex][selectedBoxIndex])) {
+
+            var selectedPositionX = frameBoxes[frameIndex][selectedBoxIndex].x * currentZoom + xPositionImage;
+            var selectedPositionY = frameBoxes[frameIndex][selectedBoxIndex].y * currentZoom + yPositionImage;
+
+            ctx.fillStyle = selectedboxColour;
+            ctx.fillRect(
+                mouseX + (selectedPositionX - startX), 
+                mouseY + (selectedPositionY - startY), 
+                frameBoxes[frameIndex][selectedBoxIndex].width * currentZoom, 
+                frameBoxes[frameIndex][selectedBoxIndex].height * currentZoom);
+        }
+    }
+
+    prevStartX = startX;
+    prevStartY = startY;
 }
 
 function boxModeSelection() {
