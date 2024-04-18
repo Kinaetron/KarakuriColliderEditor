@@ -76,6 +76,10 @@ let prevHeight = 0;
 
 let selectedBoxIndex = -1;
 
+let movingBox = false;
+let movingBoxPositionX = 0;
+let movingBoxPositionY = 0;
+
 function resizeRectangles() {
 
     if(isDrawing) {
@@ -119,6 +123,19 @@ function handleMouseUp(e) {
     else if(isSelecting) {
 
         if(!frameBoxes) {
+            return;
+        }
+
+        if(movingBox) {
+            movingBox = false;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctxo.clearRect(0, 0, canvas.width, canvas.height);
+            
+            frameBoxes[frameIndex][selectedBoxIndex].x = Math.round((movingBoxPositionX - xPositionImage) / currentZoom);
+            frameBoxes[frameIndex][selectedBoxIndex].y = Math.round((movingBoxPositionY - yPositionImage) / currentZoom);
+
+            reDrawBoxes(true);
             return;
         }
 
@@ -224,13 +241,21 @@ function handleMouseMove(e) {
             startY, 
             frameBoxes[frameIndex][selectedBoxIndex])) {
 
+            movingBox = true;
+
+            ctxo.clearRect(0, 0, canvas.width, canvas.height);
+            reDrawBoxes(false);
+
             var selectedPositionX = frameBoxes[frameIndex][selectedBoxIndex].x * currentZoom + xPositionImage;
             var selectedPositionY = frameBoxes[frameIndex][selectedBoxIndex].y * currentZoom + yPositionImage;
+            
+            movingBoxPositionX = mouseX + (selectedPositionX - startX);
+            movingBoxPositionY = mouseY + (selectedPositionY - startY);
 
             ctx.fillStyle = selectedboxColour;
             ctx.fillRect(
-                mouseX + (selectedPositionX - startX), 
-                mouseY + (selectedPositionY - startY), 
+                movingBoxPositionX, 
+                movingBoxPositionY, 
                 frameBoxes[frameIndex][selectedBoxIndex].width * currentZoom, 
                 frameBoxes[frameIndex][selectedBoxIndex].height * currentZoom);
         }
@@ -390,7 +415,7 @@ function reDrawBoxes(drawSelectedBox) {
 }
 
 function reDrawSelectedBox() {
-    if(selectedBoxIndex == -1) {
+    if(selectedBoxIndex == -1 || movingBox) {
         return;
     }
 
