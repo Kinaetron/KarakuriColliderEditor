@@ -174,6 +174,7 @@ function handleSaveBoxes(_event, value) {
 
     const saveData = {
       animationFilePath: path.relative(saveFilePath, animationFilepath),
+      frameCount: frameCount,
       boxes: value
     };
 

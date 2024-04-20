@@ -110,6 +110,11 @@ function handleMouseUp(e) {
     isDown = false;
 
     if(isDrawing) {
+
+        if(frameBoxes[frameIndex].length == 0) {
+            frameBoxes[frameIndex].push({ boxCount: 0 });
+        }
+
         frameBoxes[frameIndex].push(
             new box(
                 Math.round((prevStartX - xPositionImage) / currentZoom), 
@@ -117,6 +122,8 @@ function handleMouseUp(e) {
                 Math.round(prevWidth / currentZoom),
                 Math.round(prevHeight / currentZoom),
                 currentType));
+        
+        frameBoxes[frameIndex][0].boxCount = frameBoxes[frameIndex][0].boxCount + 1;
 
         ctxo.fillRect(prevStartX, prevStartY, prevWidth, prevHeight);
     }
@@ -139,7 +146,7 @@ function handleMouseUp(e) {
             return;
         }
 
-        for(var i = 0; i < frameBoxes[frameIndex].length; i++) 
+        for(var i = 1; i < frameBoxes[frameIndex].length; i++) 
         {
             if(pointBoxCollide(
                 startX, 
@@ -312,6 +319,7 @@ function boxTypeSelection() {
 
 function Delete() {
     if (isSelecting) {
+        frameBoxes[frameIndex][0].boxCount = frameBoxes[frameIndex][0].boxCount - 1;
         frameBoxes[frameIndex].splice(selectedBoxIndex, 1);
         selectedBoxIndex = - 1;
 
@@ -383,7 +391,7 @@ function reDrawBoxes(drawSelectedBox) {
     ctx.clearRect(0, 0, overlay.width, overlay.height);
     ctxo.clearRect(0, 0, overlay.width, overlay.height);
 
-    for(var i = 0; i < frameBoxes[frameIndex].length; i++) {
+    for(var i = 1; i < frameBoxes[frameIndex].length; i++) {
 
         if(drawSelectedBox == false && selectedBoxIndex == i) {
             continue;
