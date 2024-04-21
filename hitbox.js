@@ -332,6 +332,48 @@ function Delete() {
     }
 }
 
+function CopyToAllFrames() {
+
+    if(selectedBoxIndex == -1) {
+        return;
+    }
+
+    for(var i = 0; i < frameCount; i++) {
+
+        var alreadyThere = false;
+
+        for(var j = 1; j < frameBoxes[i].length; j++) {
+            if(frameBoxes[i][j].x == frameBoxes[frameIndex][selectedBoxIndex].x &&
+               frameBoxes[i][j].y == frameBoxes[frameIndex][selectedBoxIndex].y &&
+               frameBoxes[i][j].width == frameBoxes[frameIndex][selectedBoxIndex].width && 
+               frameBoxes[i][j].height == frameBoxes[frameIndex][selectedBoxIndex].height) {
+                alreadyThere = true;
+                continue;
+               }
+        }
+
+        if(alreadyThere) {
+            continue;
+        }
+
+        if(frameBoxes[i].length == 0) {
+            frameBoxes[i].push({ boxCount: 0 });
+        }
+
+       frameBoxes[i].push(
+        new box(
+            frameBoxes[frameIndex][selectedBoxIndex].x, 
+            frameBoxes[frameIndex][selectedBoxIndex].y,
+            frameBoxes[frameIndex][selectedBoxIndex].width,
+            frameBoxes[frameIndex][selectedBoxIndex].height,
+            frameBoxes[frameIndex][selectedBoxIndex].currentType));
+        
+        frameBoxes[i][0].boxCount = frameBoxes[i][0].boxCount + 1;
+    }
+
+    reDrawBoxes(true);
+}
+
 // listen for mouse events
 canvas.addEventListener("mousedown", function (e) {
     handleMouseDown(e);
