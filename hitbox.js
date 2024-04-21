@@ -366,7 +366,7 @@ function CopyToAllFrames() {
             frameBoxes[frameIndex][selectedBoxIndex].y,
             frameBoxes[frameIndex][selectedBoxIndex].width,
             frameBoxes[frameIndex][selectedBoxIndex].height,
-            frameBoxes[frameIndex][selectedBoxIndex].currentType));
+            frameBoxes[frameIndex][selectedBoxIndex].boxType));
         
         frameBoxes[i][0].boxCount = frameBoxes[i][0].boxCount + 1;
     }
