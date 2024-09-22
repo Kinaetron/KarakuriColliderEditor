@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KarakuriColliderEditor"
         mc:Ignorable="d"
-        Title="Karakuri Collider Editor" Height="900" Width="900">
+        Title="Karakuri Collider Editor" Height="900" Width="900"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        PreviewKeyUp="Window_PreviewKeyUp">
     <Grid>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="File">
@@ -13,5 +15,17 @@
             </MenuItem>
         </Menu>
         <Image Name="frameDisplay" />
+        <StackPanel VerticalAlignment="Bottom">
+            <Button 
+                Name="LeftButton"
+                Click="LeftButton_Click"
+                ClickMode="Release">
+                Left</Button>
+            <Button
+               Name="RightButton"
+                Click="RightButton_Click"
+                ClickMode="Release">
+                Right</Button>
+        </StackPanel>
     </Grid>
 </Window>
