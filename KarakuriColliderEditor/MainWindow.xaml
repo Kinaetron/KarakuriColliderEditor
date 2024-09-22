@@ -1,0 +1,17 @@
+﻿<Window x:Class="KarakuriColliderEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KarakuriColliderEditor"
+        mc:Ignorable="d"
+        Title="Karakuri Collider Editor" Height="900" Width="900">
+    <Grid>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New" Click="New_Click"/>
+            </MenuItem>
+        </Menu>
+        <Image Name="frameDisplay" />
+    </Grid>
+</Window>
