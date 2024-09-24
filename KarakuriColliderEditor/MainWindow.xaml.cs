@@ -90,5 +90,17 @@ namespace KarakuriColliderEditor
             _currentFrame = _currentFrame >= _maxFrame ? _maxFrame : _currentFrame + 1;
             frameDisplay.Source = _spriteAnimation.Frames[_currentFrame];
         }
+
+        private void Window_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if(e.Delta > 0)
+            {
+                MessageBox.Show("The boy is going up !");
+            }
+            else if(e.Delta < 0)
+            {
+                MessageBox.Show("The boy is going down !");
+            }
+        }
     }
 }
